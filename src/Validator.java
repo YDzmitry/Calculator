@@ -2,7 +2,7 @@
 public class Validator {
     private final String nullSymbol = " ";
     private String testString;
-    /*перетаскиваем по значению из искомой строки*/
+    /*перетаскиваем по символу из искомой строки*/
     private StringBuffer finalBufferString = new StringBuffer();
     /*приведенная к виду искомая строка*/
     private String finalString;

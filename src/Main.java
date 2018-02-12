@@ -1,6 +1,11 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class Main {
-    public static void main(String[] args) {
-        String expression = "4a * 5";
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String expression = reader.readLine();
         Validator validator = new Validator(expression);
         validator.validate();
         expression = validator.getFinalString();
