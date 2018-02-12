@@ -1,10 +1,9 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
-        String expression = "( 4 + 3 ) * 2           ^ -2   / 0            ";
+        String expression = "(4 + 3) * 2           ^ -2    * 0            ";
+        Validator validator = new Validator(expression);
+        validator.validate();
+        expression = validator.getFinalString();
         Transformation transformation = new Transformation(expression);
         transformation.transformate();
         Postfix postfix = new Postfix();
