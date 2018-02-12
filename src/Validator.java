@@ -43,7 +43,9 @@ public class Validator {
                             prevTempSymbol = nextTempSymbol;
                         }
                     } else if (nextTempSymbol.matches("\\d")) {
-                        if ((prevTempSymbol.matches("(\\d|[-.,(]|\\s)")) && (finalBufferString.toString().charAt(finalBufferString.length() - 1) != ' ')) {
+                        if ((nextTempSymbol.equals("0")) && (prevTempSymbol.equals("/"))){
+                            throw new CustomGenericException("Деление на 0");
+                        }else if ((prevTempSymbol.matches("(\\d|[-.,(]|\\s)")) && (finalBufferString.toString().charAt(finalBufferString.length() - 1) != ' ')) {
                             finalBufferString.append(nextTempSymbol);
                         } else if ((prevTempSymbol.matches("([+*/^(]||\\s)")) && (finalBufferString.toString().charAt(finalBufferString.length()-1) == ' ')) {
                             finalBufferString.append(nextTempSymbol);

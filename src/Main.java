@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        String expression = "(17 ^ 4 + 5 * 974 ^ 33 + 2.24 * 4.75)^0";
+        String expression = "1/0";
         Validator validator = new Validator(expression);
         validator.validate();
         expression = validator.getFinalString();
