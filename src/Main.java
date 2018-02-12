@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        String expression = "( 4 + 3 ) * 2           ^ -2              ";
+        String expression = "( 4 + 3 ) * 2           ^ -2   / 0            ";
         Transformation transformation = new Transformation(expression);
         transformation.transformate();
         Postfix postfix = new Postfix();
