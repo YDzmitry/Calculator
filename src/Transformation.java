@@ -30,9 +30,7 @@ public class Transformation {
     /*Очищение входной строки от лишних пробелов
     * Замена ',' на '.' для дробных чисел*/
     private String cleanString(String tempString) {
-        System.out.println(tempString);
-        tempString = tempString/*.replaceAll("[\\[\\],]", " ")*/
-                .replaceAll("\\s+", " ").replaceAll(",+",".").trim();
+        tempString = tempString.replaceAll("\\s+", " ").replaceAll(",+",".").trim();
         return tempString;
     }
 

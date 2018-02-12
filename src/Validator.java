@@ -43,12 +43,12 @@ public class Validator {
                             prevTempSymbol = nextTempSymbol;
                         }
                     } else if (nextTempSymbol.matches("\\d")) {
-                        if ((prevTempSymbol.matches("(\\d|[-.,(])")) && (testString.charAt(i - 1) != ' ')) {
+                        if ((prevTempSymbol.matches("(\\d|[-.,(]|\\s)")) && (finalBufferString.toString().charAt(finalBufferString.length() - 1) != ' ')) {
                             finalBufferString.append(nextTempSymbol);
-                        } else if ((prevTempSymbol.matches("([+*/^])")) && (testString.charAt(i - 1) == ' ')) {
+                        } else if ((prevTempSymbol.matches("([+*/^(]||\\s)")) && (finalBufferString.toString().charAt(finalBufferString.length()-1) == ' ')) {
                             finalBufferString.append(nextTempSymbol);
                         } else {
-                            throw new CustomGenericException("Ошибка");
+                            throw new CustomGenericException("Невалидные данные");
                         }
                         prevTempSymbol = nextTempSymbol;
                     } else if (nextTempSymbol.matches("([()])")) {// проверка количества скобок
@@ -80,7 +80,6 @@ public class Validator {
     }
 
     private void cleanString(String tempString) {
-        System.out.println(tempString);
         finalString = tempString.replaceAll("\\s+", " ").replaceAll(",", ".").trim();
     }
 
