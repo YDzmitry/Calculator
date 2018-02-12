@@ -3,10 +3,12 @@
 public class CustomGenericException extends Exception
 {
     private int errorCode;
+    private String errorMessage;
 
     public CustomGenericException(String message)
     {
         this(0, message);
+        errorMessage = message;
     }
 
 
@@ -20,5 +22,9 @@ public class CustomGenericException extends Exception
     public int getErrorCode()
     {
         return errorCode;
+    }
+
+    public String getErrMessage() {
+        return errorMessage;
     }
 }

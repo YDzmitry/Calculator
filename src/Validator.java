@@ -8,6 +8,7 @@ public class Validator {
     private String finalString;
     /*подсчет скобок*/
     private int flagBrackets = 0;
+    CustomGenericException customGenericException;
 
     public Validator(String testString) {
         this.testString = " " + testString + " ";
@@ -27,7 +28,7 @@ public class Validator {
                         .matches("(\\d|[-+*/^().,])")) { // проверяем символ равнозначность с регулярой
                     if (nextTempSymbol.matches("([+*/^])")) {
                         if (prevTempSymbol.matches("([+*/^])")) { // если друг за другом идут знаки вычисления
-                            throw new CustomGenericException("Повторяющийся символ");
+                            throw customGenericException = new CustomGenericException("Повторяющийся символ");
                         }
                         finalBufferString.append(nullSymbol).append(nextTempSymbol).append(nullSymbol);
                         prevTempSymbol = nextTempSymbol;
@@ -37,25 +38,25 @@ public class Validator {
                             prevTempSymbol = nextTempSymbol;
                         } else {
                             if (prevTempSymbol.equals(nextTempSymbol)) {
-                                throw new CustomGenericException("Повторяющийся символ");
+                                throw customGenericException = new CustomGenericException("Повторяющийся символ");
                             }
                             finalBufferString.append(nullSymbol).append(nextTempSymbol).append(nullSymbol);
                             prevTempSymbol = nextTempSymbol;
                         }
                     } else if (nextTempSymbol.matches("\\d")) {
                         if ((nextTempSymbol.equals("0")) && (prevTempSymbol.equals("/"))){
-                            throw new CustomGenericException("Деление на 0");
+                            throw customGenericException = new CustomGenericException("Деление на 0");
                         }else if ((prevTempSymbol.matches("(\\d|[-.,(]|\\s)")) && (finalBufferString.toString().charAt(finalBufferString.length() - 1) != ' ')) {
                             finalBufferString.append(nextTempSymbol);
                         } else if ((prevTempSymbol.matches("([+*/^(]||\\s)")) && (finalBufferString.toString().charAt(finalBufferString.length()-1) == ' ')) {
                             finalBufferString.append(nextTempSymbol);
                         } else {
-                            throw new CustomGenericException("Невалидные данные");
+                            throw customGenericException = new CustomGenericException("Невалидные данные");
                         }
                         prevTempSymbol = nextTempSymbol;
                     } else if (nextTempSymbol.matches("([()])")) {// проверка количества скобок
                         if (flagBrackets < 0) {
-                            throw new CustomGenericException("Ошибка в скобках");
+                            throw customGenericException = new CustomGenericException("Ошибка в скобках");
                         }
                         if (nextTempSymbol.equals("(")) {
                             flagBrackets++;
@@ -66,14 +67,14 @@ public class Validator {
                         prevTempSymbol = nextTempSymbol;
                     }
                 } else {
-                    throw new CustomGenericException("Встречается неверный символ в строке");
+                    throw customGenericException = new CustomGenericException("Встречается неверный символ в строке");
                 }
             }
             if (flagBrackets!=0){
-                throw new CustomGenericException("Ошибка в скобках");
+                throw customGenericException = new CustomGenericException("Ошибка в скобках");
             }
         } catch (Exception ex){
-            System.out.println(ex);
+            System.out.println(customGenericException.getErrMessage());
             System.exit(0);
         } finally{
             cleanString(finalBufferString.toString());
